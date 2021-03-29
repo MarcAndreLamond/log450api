@@ -11,3 +11,5 @@ const client = new Client({
     rejectUnauthorized: false
   }
 });
+
+client.connect();

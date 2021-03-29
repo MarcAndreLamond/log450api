@@ -1,10 +1,10 @@
 const express = require('express');
 const app = express()
 const port = process.env.PORT || 3000
-const topic_model = require('./topic_model')
+const db = require('./db_connect')
 
 app.get('/', (req, res) => {
-  return res.send('Received a GET HTTP method');
+  return res.send('Tracking api use ');
 });
 
 app.listen(port, () => {

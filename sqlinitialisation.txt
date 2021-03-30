@@ -1,0 +1,78 @@
+DROP TABLE IF EXISTS "Order";
+drop table if exists OrderPosition;
+DROP TABLE IF EXISTS "User";
+DROP TABLE IF EXISTS Role;
+
+
+CREATE TABLE Role
+(
+	roleId int GENERATED ALWAYS AS IDENTITY,
+	name varchar(20),
+	PRIMARY KEY(roleId)
+); 
+
+
+CREATE TABLE "User"
+(
+   userId int GENERATED ALWAYS AS IDENTITY,
+   email varchar(100) not NUll,
+   roleId int,
+   PRIMARY KEY(userId),
+   CONSTRAINT fk_role FOREIGN KEY(roleId) REFERENCES Role(roleId)
+);
+
+CREATE TABLE OrderPosition  (
+	orderPositionId int GENERATED ALWAYS AS IDENTITY,
+	pointStartLat float,
+	pointStartLong float,
+	pointActualLat float,
+	pointActualLong float,
+	pointArrivalLat float,
+	pointArrivalLong float,
+	dateLastKnownPosition date,
+	PRIMARY KEY(orderPositionId)
+);
+
+CREATE TABLE "Order"
+(
+	orderId int GENERATED ALWAYS AS IDENTITY,
+  	photoDelivered bytea,
+   	description  varchar(200),
+   	provider varchar(80),
+   	dateOrdered date,
+   	dateDeliveryExpected date,
+   	dateDelivered date,
+   	status varchar(50),
+   	userId int,
+   	deleveryUserId int,
+   	orderpositionid int,
+   	PRIMARY KEY(orderId),
+   	CONSTRAINT fk_user FOREIGN KEY(userId) REFERENCES "User"(userId),
+   	CONSTRAINT fk_deleveryUser FOREIGN KEY(deleveryUserId) REFERENCES "User"(userId),
+   	CONSTRAINT fk_orderPosition FOREIGN KEY(orderPositionId) REFERENCES OrderPosition(orderPositionId)
+);
+
+INSERT INTO role(name) VALUES ('user');
+INSERT INTO role(name) VALUES ('deleveryboy');
+
+INSERT INTO "User"(email,roleId) values ('test@hotmail.com',1);
+INSERT INTO "User"(email,roleId) values ('test@delevery.com',2);
+
+insert into 
+OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
+values (45.570136,-73.59048,45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');
+
+insert into 
+OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
+values (45.570136,-73.59048,45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');
+
+
+insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
+values(null,'cest un colis omg','Feedex','2021-03-28','2021-04-02',null,'in progress',1,2,1);
+
+insert into 
+"Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
+values(null,'cest un autre colis so lucky much profit','Feedex','2021-03-28','2021-04-02',null,'in progress',1,2,2);
+
+
+

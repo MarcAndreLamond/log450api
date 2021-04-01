@@ -40,7 +40,7 @@ app.get('/order', (req, res) => {
 app.get('/orderposition', (req, res) => {
   const orderpositionid = req.query.orderpositionid
   db.query(queryCall.getOrderPosition(orderpositionid)).then(response => {
-    return res.status(200).send(response);
+    return res.status(200).send(response[0]);
   })
     .catch(error => {
       return res.status(500).send(error);

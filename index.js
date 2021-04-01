@@ -14,7 +14,7 @@ app.get('/role', (req, res) => {
   const email = req.query.email;
   db.query(queryCall.getUser(email)).then(response => {
     return res.status(200).send({
-      userId: response[0].userid,
+      userid: response[0].userid,
       email: response[0].email,
       role: response[0].name
     });
@@ -25,8 +25,8 @@ app.get('/role', (req, res) => {
 });
 
 app.get('/order', (req, res) => {
-  const userid = req.query.userid
-  db.query(queryCall.getListOrder(userid)).then(response => {
+  const email = req.query.email
+  db.query(queryCall.getListOrderUser(email)).then(response => {
     return res.status(200).send(response);
   })
     .catch(error => {
@@ -40,7 +40,7 @@ app.get('/order', (req, res) => {
 app.get('/orderposition', (req, res) => {
   const orderpositionid = req.query.orderpositionid
   db.query(queryCall.getOrderPosition(orderpositionid)).then(response => {
-    return res.status(200).send(response[0]);
+    return res.status(200).send(response);
   })
     .catch(error => {
       return res.status(500).send(error);

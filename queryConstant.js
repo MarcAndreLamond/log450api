@@ -2,8 +2,8 @@ const getUser = (email) => {
     return "SELECT * from \"User\" natural join Role WHERE email = '" + email + "'";
 }
 
-const getListOrder = (userid) => {
-    return "SELECT * from \"Order\" WHERE userid = " + userid;
+const getListOrderUser = (email) => {
+    return "SELECT * FROM \"Order\" where exists ( select * from \"User\" where email = '" + email + "');"
 }
 
 const getOrderPosition = (orderPositionId) => {
@@ -22,7 +22,7 @@ const modifyOrderPosition = (deleveryboyId, lat, long, date) => {
 
 module.exports = {
     getUser,
-    getListOrder,
+    getListOrderUser,
     getOrderPosition,
     getOrderPositionList,
     modifyOrderPosition

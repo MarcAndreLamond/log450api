@@ -14,7 +14,7 @@ app.get('/role', (req, res) => {
   const email = req.query.email;
   db.query(queryCall.getUser(email)).then(response => {
     return res.status(200).send({
-      userid: response[0].userid,
+      userId: response[0].userid,
       email: response[0].email,
       role: response[0].name
     });

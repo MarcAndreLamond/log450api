@@ -52,19 +52,30 @@ CREATE TABLE "Order"
    	CONSTRAINT fk_orderPosition FOREIGN KEY(orderPositionId) REFERENCES OrderPosition(orderPositionId)
 );
 
-INSERT INTO role(name) VALUES ('user');
-INSERT INTO role(name) VALUES ('deleveryboy');
+INSERT INTO role(name) VALUES ('customer');	
+INSERT INTO role(name) VALUES ('deliveryboy');
 
 INSERT INTO "User"(email,roleId) values ('test@hotmail.com',1);
 INSERT INTO "User"(email,roleId) values ('test@delevery.com',2);
+INSERT INTO "User"(email,roleId) values ('marchermite@gmail.com',1);
+INSERT INTO "User"(email,roleId) values ('Jeanlivretout@gmail.com',2);
 
+
+insert into 
+OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
+values (45.570136,-73.59048,45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');
+ 
 insert into 
 OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
 values (45.570136,-73.59048,45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');
 
 insert into 
 OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
-values (45.570136,-73.59048,45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');
+values (45.567598,-73.590384,45.567598,-73.590384,45.566341400146484,-73.57645416259766,'2021-03-30');
+
+insert into 
+OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
+values (45.567598,-73.590384,45.567598,-73.590384,45.566341400146484,-73.57645416259766,'2021-04-01');
 
 
 insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
@@ -74,5 +85,9 @@ insert into
 "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
 values(null,'cest un autre colis so lucky much profit','Feedex','2021-03-28','2021-04-02',null,'in progress',1,2,2);
 
+insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
+values(null,'Papier hygiénique Charmin Ultra Strong, 24 rouleaux doubles','Feedex','2021-03-28','2021-04-02',null,'in progress',3,4,3);
 
+insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
+values(null,'Papier hygiénique Charmin Ultra Soft, 16 rouleaux','Feedex','2021-03-28','2021-04-02',null,'in progress',3,4,4);
 

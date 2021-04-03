@@ -3,7 +3,7 @@ const getUser = (email) => {
 }
 
 const getListOrderUser = (email) => {
-    return "SELECT * FROM \"Order\" where exists ( select * from \"User\" where email = '" + email + "');"
+    return "SELECT orderid,  photodelivered ,description, provider, dateordered,datedeliveryexpected, datedelivered, status, orderpositionid FROM \"Order\" left join \"User\" on \"User\".userid =\"Order\".userid where \"User\".email = '" + email + "'"
 }
 
 const getOrderPosition = (orderPositionId) => {

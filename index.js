@@ -26,7 +26,17 @@ app.get('/role', (req, res) => {
 
 app.get('/order', (req, res) => {
   const email = req.query.email;
-  db.query(queryCall.getListOrderUser(email)).then(response => {
+  const role = req.query.role;
+  let query;
+  if (role == undefined || role == "customer") {
+    query = queryCall.getListOrderUser(email);
+  } else if (role == "deliveryboy") {
+    query = queryCall.getListOrderUserDelevery(email);
+  } else {
+    return res.status(500).send(error);
+  }
+
+  db.query(query).then(response => {
     return res.status(200).send(response);
   })
     .catch(error => {

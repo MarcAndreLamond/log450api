@@ -6,9 +6,15 @@ const getListOrderUser = (email) => {
     return "SELECT orderid,  photodelivered ,description, provider, dateordered,datedeliveryexpected, datedelivered, status, orderpositionid FROM \"Order\" left join \"User\" on \"User\".userid =\"Order\".userid where \"User\".email = '" + email + "'"
 }
 
+const getListOrderUserDelevery = (email) => {
+    return "SELECT orderid,  photodelivered ,description, provider, dateordered,datedeliveryexpected, datedelivered, status, orderpositionid FROM \"Order\" left join \"User\" on \"User\".userid =\"Order\".deleveryuserid where \"User\".email = '" + email + "'"
+}
+
 const getOrderPosition = (orderPositionId) => {
     return "select * from OrderPosition  WHERE  OrderPositionid = " + orderPositionId;
 }
+
+
 
 const getOrderPositionList = (deleveryboyId) => {
     return "select orderpositionid from \"Order\" where deleveryUserId = " + deleveryboyId;
@@ -25,5 +31,6 @@ module.exports = {
     getListOrderUser,
     getOrderPosition,
     getOrderPositionList,
-    modifyOrderPosition
+    modifyOrderPosition,
+    getListOrderUserDelevery
 };

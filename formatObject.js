@@ -16,7 +16,7 @@ const formatOrders = (listOrder) => {
                 photoDelivered: val.photodelivered,
                 description: val.description,
                 provider: val.provider,
-                dateOrdered: val.dateOrdered,
+                dateOrdered: val.dateordered,
                 dateDeliveryExpected: val.datedeliveryexpected,
                 dateDelivered: val.datedelivered,
                 status: val.status,

@@ -4,6 +4,7 @@ const app = express()
 const port = process.env.PORT || 3000
 const db = require('./dbManager')
 const queryCall = require('./queryConstant')
+const objectFormatter = require('./formatObject')
 
 app.get('/', (req, res) => {
   return res.send('Tracking api use for the application in log450');
@@ -13,11 +14,7 @@ app.get('/', (req, res) => {
 app.get('/role', (req, res) => {
   const email = req.query.email;
   db.query(queryCall.getUser(email)).then(response => {
-    return res.status(200).send({
-      userId: response[0].userid,
-      email: response[0].email,
-      role: response[0].name
-    });
+    return res.status(200).send(objectFormatter.formatUser(response));
   })
     .catch(error => {
       return res.status(500).send(error);
@@ -37,7 +34,7 @@ app.get('/order', (req, res) => {
   }
 
   db.query(query).then(response => {
-    return res.status(200).send(response);
+    return res.status(200).send(objectFormatter.formatOrders(response));
   })
     .catch(error => {
       return res.status(500).send(error);
@@ -70,7 +67,7 @@ app.post('/orderPosition', (req, res) => {
       listPromise.push(db.query(queryCall.modifyOrderPosition(val.orderpositionid, lat, long, dateNow)))
     });
 
-    Promise.all(listPromise).then(response => {
+    Promise.all(listPromise).then(r => {
       return res.status(200).send("Position have been modified");
     }).catch(error => {
       return res.status(500).send(error);

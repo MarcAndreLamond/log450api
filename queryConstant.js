@@ -3,11 +3,11 @@ const getUser = (email) => {
 }
 
 const getListOrderUser = (email) => {
-    return "SELECT orderid,  photodelivered ,description, provider, dateordered,datedeliveryexpected, datedelivered, status, orderpositionid FROM \"Order\" left join \"User\" on \"User\".userid =\"Order\".userid where \"User\".email = '" + email + "'"
+    return "SELECT * FROM \"Order\" left join \"User\" on \"User\".userid =\"Order\".userid join OrderPosition ON OrderPosition.orderpositionid = \"Order\".orderpositionid  where \"User\".email = '" + email + "'"
 }
 
 const getListOrderUserDelevery = (email) => {
-    return "SELECT orderid,  photodelivered ,description, provider, dateordered,datedeliveryexpected, datedelivered, status, orderpositionid FROM \"Order\" left join \"User\" on \"User\".userid =\"Order\".deleveryuserid where \"User\".email = '" + email + "'"
+    return "SELECT * FROM \"Order\" left join \"User\" on \"User\".userid =\"Order\".deleveryuserid join OrderPosition ON OrderPosition.orderpositionid = \"Order\".orderpositionid  where \"User\".email = '" + email + "'"
 }
 
 const getOrderPosition = (orderPositionId) => {

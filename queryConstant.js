@@ -27,7 +27,7 @@ const modifyOrderPosition = (deleveryboyId, lat, long, date) => {
 }
 
 const modifyOrder = (orderId, date, photoByte) => {
-    return "update \"Order\" set dateDelivered = '" + date + "', status = 'delivered', photodelivered = (decode'" + photoByte + "','base64' where \"Order\".orderid = " + orderId;
+    return "update \"Order\" set dateDelivered = '" + date + "', status = 'delivered', photodelivered = decode('" + photoByte + "','base64') where \"Order\".orderid = " + orderId;
 }
 
 module.exports = {

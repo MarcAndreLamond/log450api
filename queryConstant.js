@@ -20,10 +20,9 @@ const getOrderPositionList = (deleveryboyId) => {
     return "select orderpositionid from \"Order\" where deleveryUserId = " + deleveryboyId;
 }
 
-const modifyOrderPosition = (deleveryboyId, lat, long, date) => {
-    return "update OrderPosition" +
-        " set dateLastKnownPosition = '" + date + "', pointActualLat = " + lat + ", pointActualLong = " + long +
-        " where orderPositionId =" + deleveryboyId;
+const modifyOrderPosition = (email, lat, long, date) => {
+    return "update OrderPosition set dateLastKnownPosition = '" + date + "', pointActualLat = " + lat + ", pointActualLong  = " + long + " from \"Order\" join"
+        + " \"User\" on \"User\".userid = \"Order\".deleveryuserid and \"User\".email = '" + email + "' where OrderPosition.orderpositionid = \"Order\".orderpositionid";
 }
 
 const modifyOrder = (orderId, date, photoByte) => {

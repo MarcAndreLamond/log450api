@@ -63,28 +63,16 @@ app.get('/orderPosition', (req, res) => {
 app.post('/orderPosition', (req, res) => {
   const lat = req.query.pointActualLat;
   const long = req.query.pointActualLong;
-  const deleveryboyId = req.query.deleveryboyId;
+  const email = req.query.email;
   // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
   var dateNow = new Date().toISOString().slice(0, 10);
-  db.query(queryCall.getOrderPositionList(deleveryboyId)).then(response => {
-    let listPromise = [];
 
-    response.forEach(function (val) {
-      listPromise.push(db.query(queryCall.modifyOrderPosition(val.orderpositionid, lat, long, dateNow)))
-    });
-
-    Promise.all(listPromise).then(r => {
-      return res.status(200).send("Position have been modified");
-    }).catch(error => {
-      return res.status(500).send(error);
-    })
-
+  db.query(queryCall.modifyOrderPosition(email, lat, long, dateNow)).then(_ => {
+    return res.status(200).send("Position have been modified");
   })
     .catch(error => {
       return res.status(500).send(error);
     })
-
-
 });
 
 
@@ -94,7 +82,7 @@ app.post('/order', (req, res) => {
 
   // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
   var dateNow = new Date().toISOString().slice(0, 10);
-  db.query(queryCall.modifyOrder(id, dateNow, byte)).then(response => {
+  db.query(queryCall.modifyOrder(id, dateNow, byte)).then(_ => {
     return res.status(200).send("Order have been modified");
   }).catch(error => {
     return res.status(500).send(error);

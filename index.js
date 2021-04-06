@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000
 const db = require('./dbManager')
 const queryCall = require('./queryConstant')
 const objectFormatter = require('./formatObject')
-app.use(express.json());
+app.use(express.json({ limit: '10MB' }));
 app.use(express.urlencoded({
   extended: true
 }));

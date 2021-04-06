@@ -89,7 +89,7 @@ app.post('/orderPosition', (req, res) => {
 
 
 app.post('/order', (req, res) => {
-  const byte = req.body.byte;
+  const byte = req.body;
   const id = req.query.orderId;
 
   // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd

@@ -23,8 +23,6 @@ CREATE TABLE "User"
 
 CREATE TABLE OrderPosition  (
 	orderPositionId int GENERATED ALWAYS AS IDENTITY,
-	pointStartLat float,
-	pointStartLong float,
 	pointActualLat float,
 	pointActualLong float,
 	pointArrivalLat float,
@@ -43,6 +41,9 @@ CREATE TABLE "Order"
    	dateDeliveryExpected date,
    	dateDelivered date,
    	status varchar(50),
+   	adresse varchar(200),
+   	recipientName varchar(200),
+   	shippingAddress varchar(200),
    	userId int,
    	deleveryUserId int,
    	orderpositionid int,
@@ -58,36 +59,38 @@ INSERT INTO role(name) VALUES ('deliveryboy');
 INSERT INTO "User"(email,roleId) values ('test@hotmail.com',1);
 INSERT INTO "User"(email,roleId) values ('test@delevery.com',2);
 INSERT INTO "User"(email,roleId) values ('marchermite@gmail.com',1);
-INSERT INTO "User"(email,roleId) values ('Jeanlivretout@gmail.com',2);
+INSERT INTO "User"(email,roleId) values ('jeanlivretout@gmail.com',2);
+
+
 
 
 insert into 
-OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
-values (45.570136,-73.59048,45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');
+OrderPosition(pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
+values (45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');	
  
 insert into 
-OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
-values (45.570136,-73.59048,45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');
+OrderPosition(pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
+values (45.570136,-73.59048,45.584002,-73.6048,'2021-03-30');
 
 insert into 
-OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
-values (45.567598,-73.590384,45.567598,-73.590384,45.566341400146484,-73.57645416259766,'2021-03-30');
+OrderPosition(pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
+values (45.567598,-73.590384,45.566341400146484,-73.57645416259766,'2021-03-30');
 
 insert into 
-OrderPosition(pointStartLat,pointStartLong,pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
-values (45.567598,-73.590384,45.567598,-73.590384,45.566341400146484,-73.57645416259766,'2021-04-01');
+OrderPosition(pointActualLat,pointActualLong,pointArrivalLat,pointArrivalLong,dateLastKnownPosition)
+values (45.563252,-73.589091,45.566341400146484,-73.57645416259766,'2021-04-01');
 
 
-insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
-values(null,'cest un colis omg','Feedex','2021-03-28','2021-04-02',null,'in progress',1,2,1);
+insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status,recipientName,shippingAddress, userId, deleveryUserId, orderpositionid) 
+values(null,'cest un colis omg','Feedex','2021-03-28','2021-04-02',null,'in progress','test','8618 Boulevard Viau, Montreal, QC H1R 2V4, Canada',1,2,1);
 
 insert into 
-"Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
-values(null,'cest un autre colis so lucky much profit','Feedex','2021-03-28','2021-04-02',null,'in progress',1,2,2);
+"Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status,recipientName,shippingAddress, userId, deleveryUserId, orderpositionid) 
+values(null,'cest un autre colis so lucky much profit','Feedex','2021-03-28','2021-04-02',null,'in progress','test','8618 Boulevard Viau, Montreal, QC H1R 2V4, Canada',1,2,2);
 
-insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
-values(null,'Papier hygiénique Charmin Ultra Strong, 24 rouleaux doubles','Feedex','2021-03-28','2021-04-02',null,'in progress',3,4,3);
+insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status,recipientName,shippingAddress, userId, deleveryUserId, orderpositionid) 
+values(null,'Papier hygiénique Charmin Ultra Strong, 24 rouleaux doubles','Feedex','2021-03-28','2021-04-02',null,'in progress','Marc Hermite','4475 Rue Beaubien Est, Montreal, QC H1T 3G4, Canada',3,4,3);
 
-insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status, userId, deleveryUserId, orderpositionid) 
-values(null,'Papier hygiénique Charmin Ultra Soft, 16 rouleaux','Feedex','2021-03-28','2021-04-02',null,'in progress',3,4,4);
+insert into "Order"( photoDelivered, description, provider, dateOrdered, dateDeliveryExpected, dateDelivered, status,recipientName,shippingAddress, userId, deleveryUserId, orderpositionid) 
+values(null,'Papier hygiénique Charmin Ultra Soft, 16 rouleaux','Feedex','2021-03-28','2021-04-02',null,'in progress','Marc Hermite','4475 Rue Beaubien Est, Montreal, QC H1T 3G4, Canada',3,4,4);
 

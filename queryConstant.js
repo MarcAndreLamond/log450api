@@ -26,11 +26,16 @@ const modifyOrderPosition = (deleveryboyId, lat, long, date) => {
         " where orderPositionId =" + deleveryboyId;
 }
 
+const modifyOrder = (orderId, date, photoByte) => {
+    return "update \"Order\" set dateDelivered = '" + date + "', status = 'delivered', photodelivered = (decode'" + photoByte + "','base64' where \"Order\".orderid = " + orderId;
+}
+
 module.exports = {
     getUser,
     getListOrderUser,
     getOrderPosition,
     getOrderPositionList,
     modifyOrderPosition,
-    getListOrderUserDelevery
+    getListOrderUserDelevery,
+    modifyOrder
 };

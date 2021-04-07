@@ -5,7 +5,7 @@ const port = process.env.PORT || 3000
 const db = require('./dbManager')
 const queryCall = require('./queryConstant')
 const objectFormatter = require('./formatObject')
-app.use(express.json({ limit: '10MB' }));
+app.use(express.json());
 app.use(express.urlencoded({
   extended: true
 }));
@@ -68,7 +68,7 @@ app.post('/orderPosition', (req, res) => {
   var dateNow = new Date().toISOString().slice(0, 10);
 
   db.query(queryCall.modifyOrderPosition(email, lat, long, dateNow)).then(_ => {
-    return res.status(200).send("Position have been modified");
+    return res.status(200).json('Position have been modified');
   })
     .catch(error => {
       return res.status(500).send(error);
@@ -83,7 +83,7 @@ app.post('/order', (req, res) => {
   // https://stackoverflow.com/questions/23593052/format-javascript-date-as-yyyy-mm-dd
   var dateNow = new Date().toISOString().slice(0, 10);
   db.query(queryCall.modifyOrder(id, dateNow, byte)).then(_ => {
-    return res.status(200).send("Order have been modified");
+    return res.status(200).json("Order have been modified");
   }).catch(error => {
     return res.status(500).send(error);
   })
